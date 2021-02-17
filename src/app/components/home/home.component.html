@@ -1,0 +1,47 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Index</th>
+            <th scope="col">Codigo</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Tipo</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Opciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let dato of data; let index = index">
+            <th>
+                <span>{{index+1}}</span>
+            </th>
+            <td>
+                <span *ngIf="!dato.editable">{{dato.codigo}}</span>
+                <input value="{{dato.codigo}}" *ngIf="dato.editable" (keyup)="changeValue(index, 'codigo', a.value)" #a>
+            </td>
+            <td>
+                <span *ngIf="!dato.editable">{{dato.nombre}}</span>
+                <input value="{{dato.nombre}}" *ngIf="dato.editable" (keyup)="changeValue(index, 'nombre', a.value)" #a>
+            </td>
+            <td>
+                <span *ngIf="!dato.editable">{{dato.tipo}}</span>
+                <input value="{{dato.tipo}}" *ngIf="dato.editable" (keyup)="changeValue(index, 'tipo', a.value)" #a>
+            </td>
+            <td>
+                <span *ngIf="!dato.editable">{{dato.precio}}</span>
+                <input value="{{dato.precio}}" *ngIf="dato.editable" (keyup)="changeValue(index, 'precio', a.value)" #a>
+            </td>
+
+            <td>
+                <button type="button" class="btn btn-outline-primary mr-2" (click)="dato.editable=!dato.editable" *ngIf="!dato.editable">Editar</button>
+                <button type="button" class="btn btn-outline-warning mr-2" (click)="update(dato)" *ngIf="dato.editable">Guardar</button>
+                <button type="button" class="btn btn-outline-danger" (click)="delete(dato.id, index)">Eliminar</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="row">
+    <div class="col text-center">
+        <button type="button" class="btn btn-outline-success" (click)="addNew()">Agregar Nuevo</button>
+    </div>
+</div>
